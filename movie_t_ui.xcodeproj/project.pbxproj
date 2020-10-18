@@ -164,6 +164,7 @@
 		430E7227253CB38D00BCAB15 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				430E7264253CC25200BCAB15 /* Util */,
 				430E7237253CB67A00BCAB15 /* Network */,
 				430E7229253CB5FA00BCAB15 /* Model */,
 			);
@@ -219,6 +220,13 @@
 				430E725C253CB84C00BCAB15 /* MovieDetailScreen.swift */,
 			);
 			path = MovieDetail;
+			sourceTree = "<group>";
+		};
+		430E7264253CC25200BCAB15 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		9E6D9AD4B5D73C5919DF277D /* Frameworks */ = {

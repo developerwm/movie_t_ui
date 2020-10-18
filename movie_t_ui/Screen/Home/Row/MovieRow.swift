@@ -13,46 +13,64 @@ struct MovieRow : View {
     var movie: Movie
     
     var body: some View {
-        HStack {
-            URLImage(URL(string:  "\(BASE_IMAGE_URL)\(movie.poster_path)")!, delay: 0.25) { proxy in
-                proxy.image.resizable()
-                    .frame(width: 90, height: 120)
-                
-            }
+        
+        VStack (alignment: .center) {
             
-            VStack {
+            VStack (alignment: .center) {
+                
+                URLImage(URL(string:  "\(BASE_IMAGE_URL)\(movie.poster_path)")!, delay: 0.25)
+                { proxy in
+                    proxy.image.resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 90)
+                }
+                
                 Spacer()
-                HStack {
+                
+                HStack (alignment: .center) {
+                    
+                    Spacer()
+                    
                     Text(movie.title)
-                        .foregroundColor(.blue)
-                        .lineLimit(nil)
+                        .foregroundColor(.black)
+                        .lineLimit(1)
+                        .padding(.bottom, 12)
+                    
                     Spacer()
                 }
-                HStack {
-                    Text(movie.release_date).foregroundColor(.gray)
-                    Spacer()
-                    Text("Rate: \(movie.vote_average.format())")
-                }
-                HStack {
-                    Text("Vote count: \(movie.vote_count)")
-                        .foregroundColor(.gray)
-                        .lineLimit(nil)
-                    Spacer()
-                }
-                HStack {
-                    Text("Popularity: \(movie.popularity)")
-                        .foregroundColor(.gray)
-                        .lineLimit(nil)
-                    Spacer()
-                }
-                Spacer()
+    
             }
-        }.frame(height: 130)
+            .background(Color.white)
+            .frame(height: 220)
+            .padding(.horizontal, 1)
+            .cornerRadius(8)
+    
+        }
+        .cornerRadius(5)
+        .padding(.horizontal, 6)
+        .padding(.vertical, 4)
     }
 }
 
 extension Float {
     func format() -> String {
         return String(format: "%.2f",self)
+    }
+}
+
+struct MovieRow_Previews : PreviewProvider {
+    static var previews: some View {
+        MovieRow(movie: Movie(popularity: 1.0,
+                              vote_count: 30,
+                              id: 4,
+                              vote_average: 4.0,
+                              title: "title",
+                              poster_path: "sss",
+                              original_language: "en",
+                              original_title: "aa",
+                              adult: false,
+                              overview: "teste",
+                              release_date: "2010")
+        )
     }
 }

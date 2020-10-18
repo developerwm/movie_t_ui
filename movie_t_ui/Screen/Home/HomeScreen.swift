@@ -11,19 +11,26 @@ import SwiftUI
 struct HomeScreen : View {
     @ObservedObject var networkManager = NetworkManager()
     
+    private var gridItemLayout = [GridItem(.flexible()), GridItem(.flexible())]
+    
     var body: some View {
         NavigationView {
             VStack {
                 if networkManager.loading {
                     Text("Loading ...")
                 } else {
-                    List(networkManager.movies.results) { movie in
-                        NavigationLink(destination: MovieDetailScreen(movie: movie)){
-                            MovieRow(movie: movie)
+                    ScrollView {
+                        LazyVGrid(columns: gridItemLayout, spacing: 1) {
+                            ForEach(networkManager.movies.results) { movie in
+                                NavigationLink(destination: MovieDetailScreen(movie: movie)){
+                                    MovieRow(movie: movie)
+                                }
+                            }
                         }
                     }
                 }
             }
+            .background(Color.gray)
             .navigationBarTitle(Text("Movies"))
         }
     }
